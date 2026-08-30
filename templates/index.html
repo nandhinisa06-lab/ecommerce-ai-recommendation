@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ShopEasy - AI E-Commerce</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+
+        <div class="logo">
+            🛒 ShopEasy
+        </div>
+
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="#">Products</a>
+            <a href="#">Login</a>
+            <a href="#">Cart 🛍️</a>
+        </div>
+
+    </nav>
+
+
+    <!-- Hero -->
+    <section class="hero">
+
+        <h1>Welcome to ShopEasy 🛒</h1>
+
+        <p>AI-Powered E-Commerce Platform</p>
+
+        <a href="#products" class="btn">
+            Explore Products
+        </a>
+
+    </section>
+
+
+    <!-- Products -->
+    <section class="recommendations" id="products">
+
+        <h2>🛍️ Our Products</h2>
+
+        <div class="products">
+
+            {% for product in products %}
+
+            <div class="product-card">
+
+                <div class="icon">🛒</div>
+
+                <h3>{{ product.name }}</h3>
+
+                <p>{{ product.category }}</p>
+
+                <h3>₹{{ product.price }}</h3>
+
+                <p>{{ product.description }}</p>
+
+                <p>Stock: {{ product.stock }}</p>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </section>
+
+</body>
+
+</html>
