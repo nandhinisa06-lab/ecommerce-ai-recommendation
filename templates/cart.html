@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Shopping Cart - ShopSmart AI</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <header>
+        <h1>🛍️ ShopSmart AI</h1>
+        <p>Your Shopping Cart</p>
+    </header>
+
+    <main>
+
+        <h2>🛒 My Shopping Cart</h2>
+
+        <p style="margin-bottom: 25px;">
+            Review your selected products before checkout.
+        </p>
+
+
+        {% if cart_products %}
+
+        <div id="product-list">
+
+            {% for product in cart_products %}
+
+            <div class="product-card">
+
+                <h3>
+                    {{ product["name"] }}
+                </h3>
+
+                <p>
+                    📂 <strong>Category:</strong>
+                    {{ product["category"] }}
+                </p>
+
+                <p>
+                    💰 <strong>Price:</strong>
+                    ₹{{ product["price"] }}
+                </p>
+
+                <br>
+
+                <p>
+                    <strong>Quantity</strong>
+                </p>
+
+                <a href="/decrease_quantity?id={{ product['id'] }}">
+                    <button>−</button>
+                </a>
+
+                <strong style="
+                    font-size: 18px;
+                    margin: 0 12px;
+                ">
+                    {{ product["quantity"] }}
+                </strong>
+
+                <a href="/increase_quantity?id={{ product['id'] }}">
+                    <button>+</button>
+                </a>
+
+                <br><br>
+
+                <p style="
+                    font-size: 18px;
+                    color: #2563eb;
+                ">
+                    <strong>
+                        Subtotal: ₹{{ product["subtotal"] }}
+                    </strong>
+                </p>
+
+                <br>
+
+                <a href="/remove_from_cart?id={{ product['id'] }}">
+                    <button style="background: #dc2626;">
+                        🗑️ Remove
+                    </button>
+                </a>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+
+        <br><br>
+
+
+        <!-- Total -->
+
+        <div class="product-details">
+
+            <h2>
+                🧾 Order Summary
+            </h2>
+
+            <br>
+
+            <h2 style="color: #2563eb;">
+                Total: ₹{{ total }}
+            </h2>
+
+            <br>
+
+            <a href="/checkout">
+                <button>
+                    Proceed to Checkout →
+                </button>
+            </a>
+
+        </div>
+
+
+        {% else %}
+
+        <div class="product-details">
+
+            <h2>🛒 Your Cart is Empty</h2>
+
+            <p style="margin: 15px 0;">
+                You haven't added any products yet.
+            </p>
+
+            <a href="/products">
+                <button>
+                    🛍️ Explore Products
+                </button>
+            </a>
+
+        </div>
+
+        {% endif %}
+
+
+        <br><br>
+
+        <a href="/products">
+            <button>
+                ← Continue Shopping
+            </button>
+        </a>
+
+        <a href="/">
+            <button>
+                🏠 Home
+            </button>
+        </a>
+
+    </main>
+
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+
+</html>

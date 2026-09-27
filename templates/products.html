@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Products - ShopSmart AI</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <header>
+        <h1>🛍️ ShopSmart AI</h1>
+        <p>Explore Smart Products with AI Recommendations</p>
+    </header>
+
+    <main>
+
+        <h2>🛒 All Products</h2>
+
+        <p style="margin-bottom: 25px;">
+            Explore our products and discover personalized recommendations.
+        </p>
+
+
+        <!-- Filters -->
+
+        <div style="
+            background: white;
+            padding: 20px;
+            border-radius: 14px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+        ">
+
+            <select id="categoryFilter">
+
+                <option value="all">All Categories</option>
+
+                <option value="Electronics">
+                    Electronics
+                </option>
+
+                <option value="Fashion">
+                    Fashion
+                </option>
+
+                <option value="Books">
+                    Books
+                </option>
+
+                <option value="Education">
+                    Education
+                </option>
+
+            </select>
+
+
+            <select id="priceSort">
+
+                <option value="default">
+                    Sort by Price
+                </option>
+
+                <option value="lowToHigh">
+                    Price: Low to High
+                </option>
+
+                <option value="highToLow">
+                    Price: High to Low
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- Products -->
+
+        <div id="product-list">
+
+            {% for product in products %}
+
+            <div class="product-card">
+
+                {% if product["id"] == 1 %}
+                <img src="{{ url_for('static', filename='images/headphones.png') }}"
+                     alt="Wireless Headphones"
+                     style="width: 180px; height: 180px; object-fit: contain;">
+
+                {% elif product["id"] == 2 %}
+                <img src="{{ url_for('static', filename='images/smartwatch.png') }}"
+                     alt="Smart Watch"
+                     style="width: 180px; height: 180px; object-fit: contain;">
+
+                {% elif product["id"] == 3 %}
+                <img src="{{ url_for('static', filename='images/runningshoes.png') }}"
+                     alt="Running Shoes"
+                     style="width: 180px; height: 180px; object-fit: contain;">
+
+                {% elif product["id"] == 4 %}
+                <img src="{{ url_for('static', filename='images/speaker.png') }}"
+                     alt="Bluetooth Speaker"
+                     style="width: 180px; height: 180px; object-fit: contain;">
+
+                {% elif product["id"] == 5 %}
+                <img src="{{ url_for('static', filename='images/earbuds.png') }}"
+                     alt="Wireless Earbuds"
+                     style="width: 180px; height: 180px; object-fit: contain;">
+
+                {% elif product["id"] == 6 %}
+                <img src="{{ url_for('static', filename='images/backpack.png') }}"
+                     alt="Laptop Backpack"
+                     style="width: 180px; height: 180px; object-fit: contain;">
+
+                {% elif product["id"] == 7 %}
+                <img src="{{ url_for('static', filename='images/smartphone.png') }}"
+                     alt="Smartphone"
+                     style="width: 180px; height: 180px; object-fit: contain;">
+
+                {% elif product["id"] == 8 %}
+                <img src="{{ url_for('static', filename='images/tshirt.png') }}"
+                     alt="Casual T Shirt"
+                     style="width: 180px; height: 180px; object-fit: contain;">
+
+                {% elif product["id"] == 9 %}
+                <img src="{{ url_for('static', filename='images/programmingbook.png') }}"
+                     alt="Programming Book"
+                     style="width: 180px; height: 180px; object-fit: contain;">
+
+                {% elif product["id"] == 10 %}
+                <img src="{{ url_for('static', filename='images/pythoncourse.png') }}"
+                     alt="Python Course"
+                     style="width: 180px; height: 180px; object-fit: contain;">
+                {% endif %}
+
+
+                <h3 style="margin-top: 15px;">
+                    {{ product["name"] }}
+                </h3>
+
+                <p>
+                    <strong>Category:</strong>
+                    {{ product["category"] }}
+                </p>
+
+                <p>
+                    <strong>₹{{ product["price"] }}</strong>
+                </p>
+
+                <a href="/product?id={{ product['id'] }}">
+                    <button>
+                        View Product →
+                    </button>
+                </a>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+
+        <br><br>
+
+
+        <!-- Navigation -->
+
+        <a href="/cart">
+            <button>
+                🛒 View Cart
+            </button>
+        </a>
+
+        <a href="/wishlist">
+            <button>
+                ❤️ Wishlist
+            </button>
+        </a>
+
+        <br>
+
+        <a href="/">
+            <button>
+                ← Back to Home
+            </button>
+        </a>
+
+    </main>
+
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+
+</html>

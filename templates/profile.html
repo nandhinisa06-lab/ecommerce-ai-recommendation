@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Profile - ShopSmart AI</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <header>
+        <h1>🛍️ ShopSmart AI</h1>
+        <p>Manage Your Profile</p>
+    </header>
+
+    <main>
+
+        <div class="product-details">
+
+            <h2>👤 My Profile</h2>
+
+            <p style="
+                margin-top: 20px;
+                font-size: 18px;
+            ">
+                Welcome, <strong>{{ username }}</strong>!
+            </p>
+
+            <br>
+
+            <div style="
+                background: #f9fafb;
+                padding: 20px;
+                border-radius: 12px;
+                text-align: left;
+            ">
+
+                <p>
+                    👤 <strong>Username:</strong>
+                    {{ username }}
+                </p>
+
+                <p>
+                    📞 <strong>Phone:</strong>
+                    {{ session.get("phone", "Not added") }}
+                </p>
+
+                <p>
+                    📍 <strong>Address:</strong>
+                    {{ session.get("address", "Not added") }}
+                </p>
+
+                <p>
+                    🟢 <strong>Account Status:</strong>
+                    Active
+                </p>
+
+            </div>
+
+            <br>
+
+            <a href="/edit_profile">
+                <button>
+                    ✏️ Edit Profile
+                </button>
+            </a>
+
+            <a href="/orders">
+                <button>
+                    📦 My Orders
+                </button>
+            </a>
+
+            <a href="/wishlist">
+                <button>
+                    ❤️ My Wishlist
+                </button>
+            </a>
+
+            <a href="/cart">
+                <button>
+                    🛒 My Cart
+                </button>
+            </a>
+
+            <br><br>
+
+            <a href="/logout">
+                <button style="background: #dc2626;">
+                    🚪 Logout
+                </button>
+            </a>
+
+            <br><br>
+
+            <a href="/">
+                <button>
+                    🏠 Back to Home
+                </button>
+            </a>
+
+        </div>
+
+    </main>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+
+</html>

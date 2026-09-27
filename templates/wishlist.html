@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Wishlist - ShopSmart AI</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <header>
+        <h1>🛍️ ShopSmart AI</h1>
+        <p>Your Saved Products</p>
+    </header>
+
+    <main>
+
+        <h2>❤️ My Wishlist</h2>
+
+        <p style="margin-bottom: 25px;">
+            Products you saved for later.
+        </p>
+
+        {% if wishlist_products %}
+
+        <div id="product-list">
+
+            {% for product in wishlist_products %}
+
+            <div class="product-card">
+
+                <h3>
+                    ❤️ {{ product["name"] }}
+                </h3>
+
+                <p>
+                    📂 <strong>Category:</strong>
+                    {{ product["category"] }}
+                </p>
+
+                <p>
+                    💰 <strong>Price:</strong>
+                    ₹{{ product["price"] }}
+                </p>
+
+                <p style="margin: 12px 0;">
+                    {{ product["description"] }}
+                </p>
+
+                <a href="/product?id={{ product['id'] }}">
+                    <button>
+                        View Product →
+                    </button>
+                </a>
+
+                <a href="/remove_from_wishlist?id={{ product['id'] }}">
+                    <button style="background: #dc2626;">
+                        🗑️ Remove
+                    </button>
+                </a>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        {% else %}
+
+        <div class="product-details">
+
+            <h2>❤️ Wishlist is Empty</h2>
+
+            <p style="margin: 15px 0;">
+                You haven't saved any products yet.
+            </p>
+
+            <a href="/products">
+                <button>
+                    🛍️ Explore Products
+                </button>
+            </a>
+
+        </div>
+
+        {% endif %}
+
+        <br><br>
+
+        <a href="/products">
+            <button>
+                ← Continue Shopping
+            </button>
+        </a>
+
+        <a href="/">
+            <button>
+                🏠 Back to Home
+            </button>
+        </a>
+
+    </main>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+
+</html>

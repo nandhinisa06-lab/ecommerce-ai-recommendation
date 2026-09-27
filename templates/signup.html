@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Login - ShopSmart AI</title>
+    <title>Sign Up - ShopSmart AI</title>
 
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
@@ -21,18 +21,18 @@
 
         <div class="product-details">
 
-            <h2>🔐 Welcome Back</h2>
+            <h2>📝 Create Your Account</h2>
 
             <p style="margin-bottom: 25px;">
-                Login to continue shopping with ShopSmart AI
+                Join ShopSmart AI and discover smart product recommendations.
             </p>
 
-            <form action="/login" method="POST">
+            <form action="/signup" method="POST">
 
                 <input
                     type="text"
                     name="username"
-                    placeholder="👤 Enter username"
+                    placeholder="👤 Choose a username"
                     required
                     style="width: 100%; max-width: 400px;"
                 >
@@ -42,7 +42,7 @@
                 <input
                     type="password"
                     name="password"
-                    placeholder="🔑 Enter password"
+                    placeholder="🔑 Create a password"
                     required
                     style="width: 100%; max-width: 400px;"
                 >
@@ -50,7 +50,7 @@
                 <br><br>
 
                 <button type="submit">
-                    Login 🔐
+                    Create Account 📝
                 </button>
 
             </form>
@@ -58,12 +58,12 @@
             <br>
 
             <p>
-                Don't have an account?
+                Already have an account?
             </p>
 
-            <a href="/signup">
+            <a href="/login">
                 <button>
-                    Create Account 📝
+                    Login 🔐
                 </button>
             </a>
 

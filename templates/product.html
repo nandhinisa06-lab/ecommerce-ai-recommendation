@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{ product["name"] }} - ShopSmart AI</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <header>
+        <h1>🛍️ ShopSmart AI</h1>
+        <p>Product Details & AI Recommendations</p>
+    </header>
+
+    <main>
+
+        <!-- Product Details -->
+
+        <div class="product-details">
+
+            <h2>{{ product["name"] }}</h2>
+
+            <!-- Product Image -->
+
+            {% if product["id"] == 1 %}
+            <img src="{{ url_for('static', filename='images/headphones.png') }}"
+                 alt="Wireless Headphones"
+                 style="width: 280px; height: 280px; object-fit: contain;">
+
+            {% elif product["id"] == 2 %}
+            <img src="{{ url_for('static', filename='images/smartwatch.png') }}"
+                 alt="Smart Watch"
+                 style="width: 280px; height: 280px; object-fit: contain;">
+
+            {% elif product["id"] == 3 %}
+            <img src="{{ url_for('static', filename='images/runningshoes.png') }}"
+                 alt="Running Shoes"
+                 style="width: 280px; height: 280px; object-fit: contain;">
+
+            {% elif product["id"] == 4 %}
+            <img src="{{ url_for('static', filename='images/speaker.png') }}"
+                 alt="Bluetooth Speaker"
+                 style="width: 280px; height: 280px; object-fit: contain;">
+
+            {% elif product["id"] == 5 %}
+            <img src="{{ url_for('static', filename='images/earbuds.png') }}"
+                 alt="Wireless Earbuds"
+                 style="width: 280px; height: 280px; object-fit: contain;">
+
+            {% elif product["id"] == 6 %}
+            <img src="{{ url_for('static', filename='images/backpack.png') }}"
+                 alt="Laptop Backpack"
+                 style="width: 280px; height: 280px; object-fit: contain;">
+
+            {% elif product["id"] == 7 %}
+            <img src="{{ url_for('static', filename='images/smartphone.png') }}"
+                 alt="Smartphone"
+                 style="width: 280px; height: 280px; object-fit: contain;">
+
+            {% elif product["id"] == 8 %}
+            <img src="{{ url_for('static', filename='images/tshirt.png') }}"
+                 alt="Casual T Shirt"
+                 style="width: 280px; height: 280px; object-fit: contain;">
+
+            {% elif product["id"] == 9 %}
+            <img src="{{ url_for('static', filename='images/programmingbook.png') }}"
+                 alt="Programming Book"
+                 style="width: 280px; height: 280px; object-fit: contain;">
+
+            {% elif product["id"] == 10 %}
+            <img src="{{ url_for('static', filename='images/pythoncourse.png') }}"
+                 alt="Python Course"
+                 style="width: 280px; height: 280px; object-fit: contain;">
+            {% endif %}
+
+            <br><br>
+
+            <p>
+                <strong>📂 Category:</strong>
+                {{ product["category"] }}
+            </p>
+
+            <p>
+                {{ product["description"] }}
+            </p>
+
+            <h3 style="font-size: 25px; color: #2563eb;">
+                ₹{{ product["price"] }}
+            </h3>
+
+            <br>
+
+            <!-- Average Rating -->
+
+            <div style="
+                background: #f9fafb;
+                padding: 15px;
+                border-radius: 10px;
+                margin: 15px 0;
+            ">
+
+                {% if rating_count > 0 %}
+
+                <p>
+                    ⭐ <strong>{{ average_rating }} / 5</strong>
+                    <br>
+                    <small>{{ rating_count }} customer rating(s)</small>
+                </p>
+
+                {% else %}
+
+                <p>
+                    ⭐ No ratings yet
+                </p>
+
+                {% endif %}
+
+            </div>
+
+            <!-- Actions -->
+
+            <a href="/add_to_cart?id={{ product['id'] }}">
+                <button>
+                    🛒 Add to Cart
+                </button>
+            </a>
+
+            <a href="/add_to_wishlist?id={{ product['id'] }}">
+                <button>
+                    ❤️ Add to Wishlist
+                </button>
+            </a>
+
+        </div>
+
+
+        <br>
+
+
+        <!-- Product Rating -->
+
+        <div class="product-details">
+
+            <h2>⭐ Rate This Product</h2>
+
+            <p>
+                Your rating helps improve the shopping experience.
+            </p>
+
+            <br>
+
+            <form action="/rate_product" method="POST">
+
+                <input
+                    type="hidden"
+                    name="product_id"
+                    value="{{ product['id'] }}"
+                >
+
+                <select name="rating" required>
+
+                    <option value="">
+                        Choose Rating
+                    </option>
+
+                    <option value="5">
+                        ⭐⭐⭐⭐⭐ 5 Stars
+                    </option>
+
+                    <option value="4">
+                        ⭐⭐⭐⭐ 4 Stars
+                    </option>
+
+                    <option value="3">
+                        ⭐⭐⭐ 3 Stars
+                    </option>
+
+                    <option value="2">
+                        ⭐⭐ 2 Stars
+                    </option>
+
+                    <option value="1">
+                        ⭐ 1 Star
+                    </option>
+
+                </select>
+
+                <br><br>
+
+                <button type="submit">
+                    Submit Rating ⭐
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <br>
+
+
+        <!-- AI Recommendations -->
+
+        <div>
+
+            <h2>
+                🤖 AI Recommended Products
+            </h2>
+
+            <p style="margin-top: 8px;">
+                Based on similar categories and product features
+            </p>
+
+            <div class="recommendations">
+
+                {% for recommendation in recommendations %}
+
+                <div class="product-card">
+
+                    <h3>
+                        {{ recommendation["name"] }}
+                    </h3>
+
+                    <p>
+                        💡 {{ recommendation["reason"] }}
+                    </p>
+
+                    <a href="/product?id={{ recommendation['id'] }}">
+                        <button>
+                            View Product →
+                        </button>
+                    </a>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+
+        <br><br>
+
+
+        <!-- Navigation -->
+
+        <a href="/products">
+            <button>
+                ← Back to Products
+            </button>
+        </a>
+
+        <a href="/cart">
+            <button>
+                🛒 Cart
+            </button>
+        </a>
+
+        <br>
+
+        <a href="/">
+            <button>
+                🏠 Home
+            </button>
+        </a>
+
+    </main>
+
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+
+</html>

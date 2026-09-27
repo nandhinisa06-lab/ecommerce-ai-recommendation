@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Profile - ShopSmart AI</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <header>
+        <h1>🛍️ ShopSmart AI</h1>
+        <p>Update Your Profile</p>
+    </header>
+
+    <main>
+
+        <div class="product-details">
+
+            <h2>✏️ Edit Profile</h2>
+
+            <p style="margin-bottom: 25px;">
+                Update your account and delivery information.
+            </p>
+
+            <form action="/edit_profile" method="POST">
+
+                <label>
+                    👤 <strong>Username</strong>
+                </label>
+
+                <br><br>
+
+                <input
+                    type="text"
+                    name="username"
+                    value="{{ username }}"
+                    placeholder="Enter username"
+                    required
+                    style="width: 100%; max-width: 450px;"
+                >
+
+                <br><br>
+
+                <label>
+                    📞 <strong>Phone Number</strong>
+                </label>
+
+                <br><br>
+
+                <input
+                    type="tel"
+                    name="phone"
+                    value="{{ phone }}"
+                    placeholder="Enter phone number"
+                    style="width: 100%; max-width: 450px;"
+                >
+
+                <br><br>
+
+                <label>
+                    📍 <strong>Address</strong>
+                </label>
+
+                <br><br>
+
+                <textarea
+                    name="address"
+                    rows="5"
+                    placeholder="Enter your delivery address"
+                    style="width: 100%; max-width: 450px;"
+                >{{ address }}</textarea>
+
+                <br><br>
+
+                <button type="submit">
+                    💾 Save Changes
+                </button>
+
+            </form>
+
+            <br>
+
+            <a href="/profile">
+                <button>
+                    ← Back to Profile
+                </button>
+            </a>
+
+        </div>
+
+    </main>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+
+</html>

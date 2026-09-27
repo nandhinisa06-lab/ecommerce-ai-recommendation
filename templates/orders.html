@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Orders - ShopSmart AI</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <header>
+        <h1>🛍️ ShopSmart AI</h1>
+        <p>Your Order History</p>
+    </header>
+
+    <main>
+
+        <h2>📦 My Orders</h2>
+
+        <p style="margin-bottom: 25px;">
+            View your previous orders and delivery details.
+        </p>
+
+        {% if orders %}
+
+        <div id="product-list">
+
+            {% for order in orders %}
+
+            <div class="product-card">
+
+                <h3>
+                    📦 Order #{{ order["order_id"] }}
+                </h3>
+
+                <p style="color: #6b7280;">
+                    📅 {{ order["date"] }}
+                </p>
+
+                <hr style="
+                    margin: 18px 0;
+                    border: none;
+                    border-top: 1px solid #e5e7eb;
+                ">
+
+                <p>
+                    👤 <strong>Customer:</strong>
+                    {{ order["name"] }}
+                </p>
+
+                <p>
+                    📞 <strong>Phone:</strong>
+                    {{ order["phone"] }}
+                </p>
+
+                <p>
+                    📍 <strong>Delivery Address:</strong>
+                    {{ order["address"] }}
+                </p>
+
+                <hr style="
+                    margin: 18px 0;
+                    border: none;
+                    border-top: 1px solid #e5e7eb;
+                ">
+
+                <h3 style="
+                    color: #2563eb;
+                    margin-bottom: 10px;
+                ">
+                    💰 Total: ₹{{ order["total"] }}
+                </h3>
+
+                <p style="
+                    color: #166534;
+                    font-weight: 600;
+                ">
+                    ✅ {{ order["status"] }}
+                </p>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        {% else %}
+
+        <div class="product-details">
+
+            <h2>📦 No Orders Yet</h2>
+
+            <p style="margin: 15px 0;">
+                You haven't placed any orders yet.
+            </p>
+
+            <a href="/products">
+                <button>
+                    🛍️ Start Shopping
+                </button>
+            </a>
+
+        </div>
+
+        {% endif %}
+
+        <br><br>
+
+        <a href="/products">
+            <button>
+                🛍️ Continue Shopping
+            </button>
+        </a>
+
+        <a href="/">
+            <button>
+                🏠 Back to Home
+            </button>
+        </a>
+
+    </main>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+
+</html>

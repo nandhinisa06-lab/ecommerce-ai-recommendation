@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Checkout - ShopSmart AI</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <header>
+        <h1>🛍️ ShopSmart AI</h1>
+        <p>Secure Checkout</p>
+    </header>
+
+    <main>
+
+        <h2>🧾 Checkout</h2>
+
+        <p style="margin-bottom: 25px;">
+            Enter your delivery details and review your order.
+        </p>
+
+
+        {% if cart_products %}
+
+        <!-- Customer Details -->
+
+        <div class="product-details">
+
+            <h2>👤 Customer Details</h2>
+
+            <p style="margin-bottom: 20px;">
+                Please enter your delivery information.
+            </p>
+
+            <form action="/place_order" method="GET">
+
+                <input
+                    type="text"
+                    name="name"
+                    placeholder="👤 Enter your full name"
+                    required
+                    style="width: 100%; max-width: 450px;"
+                >
+
+                <br><br>
+
+                <input
+                    type="tel"
+                    name="phone"
+                    placeholder="📱 Enter phone number"
+                    required
+                    style="width: 100%; max-width: 450px;"
+                >
+
+                <br><br>
+
+                <textarea
+                    name="address"
+                    placeholder="📍 Enter delivery address"
+                    rows="4"
+                    required
+                    style="width: 100%; max-width: 450px;"
+                ></textarea>
+
+                <br><br>
+
+                <button type="submit">
+                    Place Order ✅
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <br><br>
+
+
+        <!-- Order Summary -->
+
+        <div>
+
+            <h2>🛒 Order Summary</h2>
+
+            <div id="product-list">
+
+                {% for product in cart_products %}
+
+                <div class="product-card">
+
+                    <h3>
+                        {{ product["name"] }}
+                    </h3>
+
+                    <p>
+                        📦 <strong>Quantity:</strong>
+                        {{ product["quantity"] }}
+                    </p>
+
+                    <p>
+                        💰 <strong>Price:</strong>
+                        ₹{{ product["price"] }}
+                    </p>
+
+                    <p style="color: #2563eb;">
+                        <strong>
+                            Subtotal: ₹{{ product["subtotal"] }}
+                        </strong>
+                    </p>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+
+        <br>
+
+
+        <!-- Total -->
+
+        <div class="product-details">
+
+            <h2>🧾 Final Amount</h2>
+
+            <h2 style="
+                color: #2563eb;
+                margin-top: 15px;
+            ">
+                ₹{{ total }}
+            </h2>
+
+            <p style="margin-top: 10px;">
+                Total amount payable
+            </p>
+
+        </div>
+
+
+        <br>
+
+        <a href="/cart">
+            <button>
+                ← Back to Cart
+            </button>
+        </a>
+
+
+        {% else %}
+
+        <div class="product-details">
+
+            <h2>🛒 Your Cart is Empty</h2>
+
+            <p style="margin: 15px 0;">
+                Add products to your cart before checkout.
+            </p>
+
+            <a href="/products">
+                <button>
+                    🛍️ Continue Shopping
+                </button>
+            </a>
+
+        </div>
+
+        {% endif %}
+
+    </main>
+
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+
+</html>

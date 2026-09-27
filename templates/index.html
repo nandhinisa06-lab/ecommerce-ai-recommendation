@@ -5,75 +5,116 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>ShopEasy - AI E-Commerce</title>
+    <title>ShopSmart AI</title>
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body>
 
-    <!-- Navigation -->
-    <nav class="navbar">
+    <header>
+        <h1>🛍️ ShopSmart AI</h1>
+        <p>AI-Powered Product Recommendations</p>
+    </header>
 
-        <div class="logo">
-            🛒 ShopEasy
-        </div>
+    <main>
 
-        <div class="nav-links">
-            <a href="/">Home</a>
-            <a href="#">Products</a>
-            <a href="#">Login</a>
-            <a href="#">Cart 🛍️</a>
-        </div>
+        <h2>Welcome to ShopSmart AI</h2>
 
-    </nav>
+        {% if session.get("username") %}
+
+        <p>
+            👋 Welcome, <strong>{{ session["username"] }}</strong>!
+        </p>
+
+        {% else %}
+
+        <p>
+            Discover products specially recommended for you.
+        </p>
+
+        {% endif %}
+
+        <br>
 
 
-    <!-- Hero -->
-    <section class="hero">
+        <!-- Product Search -->
 
-        <h1>Welcome to ShopEasy 🛒</h1>
+        <input
+            type="text"
+            id="homeSearchInput"
+            placeholder="🔍 Search for a product..."
+        >
 
-        <p>AI-Powered E-Commerce Platform</p>
+        <button id="homeSearchButton">
+            Search 🔍
+        </button>
 
-        <a href="#products" class="btn">
-            Explore Products
+        <br><br>
+
+
+        <!-- Login / Signup / Logout -->
+
+        {% if session.get("username") %}
+
+        <a href="/logout">
+            <button>🚪 Logout</button>
         </a>
 
-    </section>
+        {% else %}
+
+        <a href="/login">
+            <button>🔐 Login</button>
+        </a>
+
+        <a href="/signup">
+            <button>📝 Sign Up</button>
+        </a>
+
+        {% endif %}
+
+        <br><br>
 
 
-    <!-- Products -->
-    <section class="recommendations" id="products">
+        <!-- My Profile -->
 
-        <h2>🛍️ Our Products</h2>
+        <a href="/profile">
+            <button>👤 My Profile</button>
+        </a>
 
-        <div class="products">
+        <br><br>
 
-            {% for product in products %}
 
-            <div class="product-card">
+        <!-- Explore Products -->
 
-                <div class="icon">🛒</div>
+        <a href="/products">
+            <button>Explore Products 🛍️</button>
+        </a>
 
-                <h3>{{ product.name }}</h3>
+        <br><br>
 
-                <p>{{ product.category }}</p>
 
-                <h3>₹{{ product.price }}</h3>
+        <!-- View Cart -->
 
-                <p>{{ product.description }}</p>
+        <a href="/cart">
+            <button>View Cart 🛒</button>
+        </a>
 
-                <p>Stock: {{ product.stock }}</p>
+        <br><br>
 
-            </div>
 
-            {% endfor %}
+        <!-- My Orders -->
 
-        </div>
+        <a href="/orders">
+            <button>📦 My Orders</button>
+        </a>
 
-    </section>
+    </main>
+
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 
 </body>
 
 </html>
+
